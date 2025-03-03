@@ -1,11 +1,71 @@
-/* 
+.container {
+    background-color: #f7f7f7;
+    padding: 20px;
+    width: 400px;
+    margin: 50px auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      #f1f1f1 0,
+      #f1f1f1 1px,
+      transparent 1px,
+      transparent 30px
+    );
+  }
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
 
-*/
+  .input-field {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  .task {
+    padding: 10px;
+    background-color: #fff;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+  }
+
+  .task.completed {
+    background-color: #e0f7e0;
+    text-decoration: line-through;
+    color: #888;
+  }
+  .delete-btn {
+    display: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .delete-btn:hover{
+    transform: scale(1.2);
+    background-color: rgb(255, 0, 0);
+  }
+
+  .task:hover .delete-btn {
+    display: inline-block;
+  }
+
+  .message {
+    color: #888;
+    text-align: center;
+  }
