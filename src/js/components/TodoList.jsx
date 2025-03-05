@@ -1,33 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const TodoList = () => {
-  // Estado para almacenar las tareas
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState('');
+  //creamos dos estados mas uno para almacenar la tarea que se esta editando y el otro para almacenar el texto editado
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editingText, setEditingText] = useState('');
 
-  //función para agregar tarea
+  
+  useEffect(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  // Función para agregar tarea
   const addTask = (task) => {
-    setTasks([...tasks, { text: task, completed: false }]);
+    const newTasks = [...tasks, { text: task, completed: false }];
+    setTasks(newTasks);
+    localStorage.setItem('tasks', JSON.stringify(newTasks)); // Guardar tareas en localStorage
     setInput('');
   };
 
-  //función para eliminar tarea
+  // Función para eliminar tarea
   const deleteTask = (index) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Guardar tareas en localStorage
   };
 
-  //función para elcheckbox
+  // Función para cambiar el estado de completado de una tarea
   const toggleComplete = (index) => {
     const updatedTasks = [...tasks];
     updatedTasks[index].completed = !updatedTasks[index].completed;
     setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Guardar tareas en localStorage
   };
 
-  //función para saber que se pulso enter
+  // Función para comenzar la edición de una tarea
+  const startEditing = (index) => {
+    setEditingIndex(index);
+    setEditingText(tasks[index].text);
+  };
+
+  // Función para manejar la tecla Enter
   const handleKeyPress = (event) => {
     if (event.key === 'Enter' && input.trim()) {
       addTask(input.trim());
+    }
+  };
+
+  // Función para guardar la tarea editada
+  const saveEdit = () => {
+    if (editingText.trim()) {
+      const updatedTasks = [...tasks];
+      updatedTasks[editingIndex].text = editingText.trim();
+      setTasks(updatedTasks);
+      localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Guardar tareas en localStorage
+      setEditingIndex(null);
+      setEditingText('');
     }
   };
 
@@ -58,7 +90,24 @@ const TodoList = () => {
                 checked={task.completed}
                 onChange={() => toggleComplete(index)}
               />
-              <span>{task.text}</span>
+              {editingIndex === index ? (
+                <div>
+                  <input
+                    type="text"
+                    value={editingText}
+                    onChange={(e) => setEditingText(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && saveEdit()}
+                  />
+                </div>
+              ) : (
+                <span>{task.text}</span>
+              )}
+              <button
+                className="edit-btn"
+                onClick={() => startEditing(index)}
+              >
+                ✏️
+              </button>
               <button
                 className="delete-btn"
                 onClick={() => deleteTask(index)}
@@ -70,7 +119,7 @@ const TodoList = () => {
         )}
       </ul>
       <div className="task-counter">
-        <span>{tasks.length === 0 ? '' : `You have ${tasks.length} item`}</span>
+        <span>{tasks.length === 0 ? '' : `You have ${tasks.length} item(s)`}</span>
       </div>
     </div>
   );

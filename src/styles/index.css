@@ -1,22 +1,28 @@
+    /* to do list la hoja de cuaderno entera */
+body{
+  background-image: url(https://images.unsplash.com/photo-1654124803525-fe9bcaa2de49?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-size: cover;
+}
+
 .container {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     padding: 20px;
     width: 400px;
     margin: 50px auto;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(to bottom, #fff, #f1f1f1);
+    /*background: linear-gradient(to bottom, #fff, #f1f1f1);
     background-image: repeating-linear-gradient(
       to bottom,
       #f1f1f1 0,
       #f1f1f1 1px,
       transparent 1px,
       transparent 30px
-    );
+    );*/
   }
-
+    /* casilla o input donde escribimos las tareas  */
   .input-field {
     padding: 10px;
     width: 100%;
@@ -26,12 +32,12 @@
     font-size: 16px;
     background-color:#ccc8c83b;
   }
-
+    /*  lista de tareas  */
   ul {
     list-style-type: none;
     padding: 0;
   }
-
+    /* estilo para las tareas   */
   .task {
     padding: 10px;
     background-color: #ffffff77;
@@ -43,22 +49,22 @@
     font-size: 18px;
     border: 1px solid #ddd;
   }
-
+    /* estilo de tarea completada un pequeño toque verde a las tareas hechas. */
   .task.completed {
     background-color: #afeeaf60;
     text-decoration: line-through;
     color: #888;
   }
-
+    /* estilo para el fondo de las tareas en lista  */
   .task:hover {
-    background-color: #f9f9f9;
+    background-color: #d6d0d0cb;
   }
-
+    /*  checkbox  */
   .task input[type='checkbox'] {
     margin-right: 10px;
-    transform: scale(1.4);
+    transform: scale(1.3);
   }
-
+    /* boton eliminar  */
   .delete-btn {
     display: none;
     color: white;
@@ -66,17 +72,30 @@
     cursor: pointer;
     border-radius: 5px;
   }
-  
+      /* hover del boton eliminar  */
   .delete-btn:hover{
     transform: scale(1.2);
     background-color: rgb(255, 0, 0);
   }
-
+    /* hover para que aparezca el boton de eliminar  */
   .task:hover .delete-btn {
     display: inline-block;
   }
+    /* boton para editar  */
+  .edit-btn {
+    margin-right: 10px;
+    display: none;
+  }
+      /* hover para mostrar el boton cuando estemos encima de la tarea  */
+  .task:hover .edit-btn {
+    display: inline-block;
+  }
 
+
+  /* mensaje de que no tenemos tareas */
   .message {
     color: #888;
     text-align: center;
   }
+
+    /*   */
